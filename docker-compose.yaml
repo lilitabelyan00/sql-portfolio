@@ -24,17 +24,17 @@ services:
       - ./data:/docker-entrypoint-initdb.d/data:ro
 
   pgadmin:
-    container_name: pgadmin_aca
-    image: dpage/pgadmin4
-    restart: always
-    env_file: .env
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - "5050:80"
-    volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
-      - ./queries:/var/lib/pgadmin/storage/admin_admin.com/queries
-    depends_on:
-      - db
+      container_name: pgadmin_aca
+      image: dpage/pgadmin4
+      restart: always
+      env_file: .env
+      environment:
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      ports:
+        - "5050:80"
+      volumes:
+        - ./pgadmin_data:/var/lib/pgadmin
+        - ./queries:/var/lib/pgadmin/storage/admin_admin.com/queries
+      depends_on:
+        - db
