@@ -1,0 +1,29 @@
+DROP TABLE IF EXISTS analytics.staff CASCADE;
+
+CREATE TABLE analytics.staff (
+    staff_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(45),
+    last_name VARCHAR(45),
+    email VARCHAR(50),
+    store_id INT REFERENCES analytics.store(store_id)
+);
+
+INSERT INTO analytics.staff (
+    first_name,
+    last_name,
+    email,
+    store_id
+)
+SELECT DISTINCT
+    s.staff_first_name,
+    s.staff_last_name,
+    s.staff_email,
+    st.store_id
+FROM analytics._stg_rockbuster s
+JOIN analytics.store st
+  ON st.store_number = s.store_number;
+
+SELECT 
+    * 
+FROM analytics.staff
+LIMIT 10

@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS analytics.store CASCADE;
+
+CREATE TABLE analytics.store (
+    store_id SERIAL PRIMARY KEY,
+    store_number INT UNIQUE
+);
+
+INSERT INTO analytics.store (store_number)
+SELECT DISTINCT store_number
+FROM analytics._stg_rockbuster;
+
+SELECT 
+    * 
+FROM analytics.store
+LIMIT 10
