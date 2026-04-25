@@ -1,5 +1,3 @@
-CREATE SCHEMA analytics
-
 DROP TABLE IF EXISTS analytics._stg_rockbuster;
 
 CREATE TABLE analytics._stg_rockbuster (
@@ -44,3 +42,8 @@ CREATE TABLE analytics._stg_rockbuster (
     staff_last_name       varchar(45),
     staff_email           varchar(50)
 );
+
+COPY analytics._stg_rockbuster
+FROM '/docker-entrypoint-initdb.d/data/rockbuster/rockbuster_denormalized.csv'
+CSV HEADER
+NULL 'NULL';
